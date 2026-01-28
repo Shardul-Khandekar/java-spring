@@ -38,7 +38,7 @@ public class HelloController {
 
 // RestController tells spring that this class will handle web requests
 // GetMapping tells spring that this method will be called when someone visits localhost:8080/hello
-// @Autowired finds the HelloService class and creates an instance, dependency injection
+// @Autowired finds the HelloService class and creates an instance, dependency injection. It usually creates Singletons meaning only one copy exists in the entire app
 // @PathVariable grabs the value from URL placeholder and passes it into String name variable
 // @PostMapping tells spring that this method will respond to POST requests
 // @RequestBody tells spring to take incoming JSON and turn into User object
