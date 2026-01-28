@@ -22,15 +22,18 @@ public class HelloController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<String> createUser(@RequestBody User user) {
+    public ResponseEntity<UserResponse> createUser(@RequestBody UserDTO userDto) {
         
-        if( user.getAge() < 0){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body("Age cannot be negative!");
+        if( userDto.getAge() < 0){
+            return ResponseEntity
+                .badRequest()
+                .body(new UserResponse("Invalid age", "FAIL"));
         }
-        String response = helloService.processUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED)
-            .body(response);
+
+        String response = helloService.processUser(userDto);
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(new UserResponse(response, "SUCCESS"));
     }
 
 }
@@ -42,3 +45,6 @@ public class HelloController {
 // @PostMapping tells spring that this method will respond to POST requests
 // @RequestBody tells spring to take incoming JSON and turn into User object
 // ResponseEntity allows to control status code, header and body of the response
+// Data Transfer Object (DTO) -> Carry data from the outside API to internal logic
+// If user object has a password hash, and if entire user object is returned then it carries a risk
+// Instead use UserDTO for the outside and UserEntity for internal logic

@@ -9,7 +9,7 @@ public class HelloService {
         return "Hello " + name + " from the service layer!";
     }
 
-    public String processUser(User user){
+    public String processUser(UserDTO user){
         return "User " + user.getName() + " age " + user.getAge() + " has been registered!";
     }
     
