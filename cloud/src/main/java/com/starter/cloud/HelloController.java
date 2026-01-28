@@ -25,9 +25,7 @@ public class HelloController {
     public ResponseEntity<UserResponse> createUser(@RequestBody UserDTO userDto) {
         
         if( userDto.getAge() < 0){
-            return ResponseEntity
-                .badRequest()
-                .body(new UserResponse("Invalid age", "FAIL"));
+            throw new InvalidUserException("Age cannot be negative");
         }
 
         String response = helloService.processUser(userDto);
@@ -48,3 +46,4 @@ public class HelloController {
 // Data Transfer Object (DTO) -> Carry data from the outside API to internal logic
 // If user object has a password hash, and if entire user object is returned then it carries a risk
 // Instead use UserDTO for the outside and UserEntity for internal logic
+// @RestControllerAdvice -> Global exception handling for all controllers
