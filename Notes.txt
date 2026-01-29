@@ -1,0 +1,5 @@
+Heap - Shared Space - Where objects live. Since the service is singleton, there is exactly one instance sitting on the Heap. Any variable defined
+at the class level outside the method lives on the heap inside that object.
+Stack - Private Space - Every time a new thread is created (for a new user request), it gets its own Stack. Only variables defined inside a 
+method live here. 
+It is important to understand that services should be stateless
