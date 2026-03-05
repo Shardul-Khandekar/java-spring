@@ -8,5 +8,9 @@ public class HelloService {
     public String getGreeting(String name){
         return "Hello " + name + " from the service layer!";
     }
+
+    public String processUser(User user){
+        return "User " + user.getName() + " age " + user.getAge() + " has been registered!";
+    }
     
 }
