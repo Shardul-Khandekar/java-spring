@@ -1,0 +1,45 @@
+### Build Tools (Maven) ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.nextSnapshot
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+### IDEs ###
+# IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Eclipse
+.settings/
+.project
+.classpath
+.factorypath
+
+# VS Code
+.vscode/
+
+### Logs & Temp ###
+*.log
+/logs/
+temp/
+
+### Sensitive/Local Configs ###
+.env
+bin/
+application-local.properties
+application-local.yml
+bootstrap-local.properties
+bootstrap-local.yml
+
+### OS Specific ###
+.DS_Store
+Thumbs.db
