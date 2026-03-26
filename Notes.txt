@@ -3,3 +3,6 @@ at the class level outside the method lives on the heap inside that object.
 Stack - Private Space - Every time a new thread is created (for a new user request), it gets its own Stack. Only variables defined inside a 
 method live here. 
 It is important to understand that services should be stateless
+
+If two classes email and sms both marked as @service and implement the same interface, spring will panic at startup.
+It will find two things that fit the criteria and wont be able to decide -> NoUniqueBeanDefinitionException

@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PilotApplication",
+            "request": "launch",
+            "mainClass": "com.learning.pilot.PilotApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-CloudApplication<cloud>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
