@@ -1,38 +1,57 @@
 package com.learning.pilot.controller;
 
 import com.learning.pilot.model.Order;
+import com.learning.pilot.service.OrderService;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
 
-    // In-memory list to store orders
-    private List<Order> orders = new ArrayList<>();
+    private final OrderService orderService;
 
-    // GET all orders
+    // Constructor
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
     @GetMapping
-    public List<Order> getAllOrders() {
-        return orders;
+    public ResponseEntity<List<Order>> getAllOrders() {
+        return ResponseEntity.ok(orderService.getAllOrders());
     }
 
-    // GET a single order by ID
     @GetMapping("/{id}")
-    public Order getOrderById(@PathVariable String id) {
-        return orders.stream()
-                .filter(o -> o.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+    public ResponseEntity<Order> getOrderById(@PathVariable String id) {
+        return orderService.getOrderById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    // POST - create a new order
     @PostMapping
-    public Order createOrder(@RequestBody Order order) {
-        orders.add(order);
-        return order;
+    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
+        Order created = orderService.createOrder(order);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Order> updateOrder(@PathVariable String id,
+                                             @RequestBody Order order) {
+        return orderService.updateOrder(id, order)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable String id) {
+        if (orderService.deleteOrder(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }
